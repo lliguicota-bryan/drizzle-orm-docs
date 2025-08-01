@@ -19,7 +19,6 @@
 
   // Inkeep Sidebar Initialization
   const initializeInkeepSidebar = () => {
-    // Only initialize if Inkeep is loaded and container exists
     if (typeof Inkeep === 'undefined' || !document.getElementById('ikp-sidebar-chat-target')) {
       return;
     }
@@ -54,6 +53,12 @@
       },
       aiChatSettings: {
         aiAssistantAvatar: '/svg/drizzle.svg',
+        exampleQuestions: [
+          "How do I get started with Drizzle ORM?",
+          "How do I connect to a PostgreSQL database?",
+          "How do I create database migrations?",
+          "How do I define relationships between tables?"
+        ],
       },
       position: 'right',
       defaultWidth: 420,
@@ -70,14 +75,12 @@
       if (container) {
         // Clear any leftover DOM elements from previous widget
         container.innerHTML = '';
-        console.log('Container cleared, children count:', container.children.length);
       }
       
       // Always create fresh widget (no update method)
       window.inkeepWidget = Inkeep.SidebarChat("#ikp-sidebar-chat-target", config);
-      console.log('Inkeep sidebar reinitialized with component');
     } catch (e) {
-      console.log('Inkeep initialization error:', e);
+      // Silently handle initialization errors
     }
   };
 
@@ -123,6 +126,19 @@
     width: 16px;
     height: 16px;
     color: currentColor;
+    pointer-events: none;
+  }
+
+  .nav_ai-btn span {
+    pointer-events: none;
+  }
+
+  .nav_ai-btn svg {
+    pointer-events: none;
+  }
+
+  .nav_ai-btn * {
+    pointer-events: none;
   }
 
   html[class~=dark] .nav_ai-btn {
